@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "main.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MybackendGrpcSvc"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/user/byid": {
+      "get": {
+        "operationId": "MybackendGrpcSvc_GetUserInfoById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserInfoByIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MybackendGrpcSvc"
+        ]
+      }
+    },
+    "/v1/user/byusername": {
+      "get": {
+        "operationId": "MybackendGrpcSvc_GetUserInfoByUsername",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserInfoByUsernameResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MybackendGrpcSvc"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "#######"
+    },
+    "v1GetUserInfoByIdResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/v1Error"
+        },
+        "result": {
+          "$ref": "#/definitions/v1GetUserInfoByIdResult"
+        }
+      }
+    },
+    "v1GetUserInfoByIdResult": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userFirstname": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetUserInfoByUsernameResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/v1Error"
+        },
+        "result": {
+          "$ref": "#/definitions/v1GetUserInfoByUsernameResult"
+        }
+      }
+    },
+    "v1GetUserInfoByUsernameResult": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userFirstname": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
